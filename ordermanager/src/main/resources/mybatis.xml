@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 设置日志 -->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <!-- resultType是告诉mybatis，我这个语句查询要封装成哪个类-->
+    <typeAliases>
+        <!--<typeAlias type="com.zs.entity.Course" alias="Course"/>-->
+
+        <!--扫描路径里所有Class，命名一个名，名字为类名，可以加注解，则命名为注解例子Course.java-->
+        <package name="com.zs.entity"/>
+    </typeAliases>
+    <!--typeAlias起别名;执行语句为ourseMapper里的-->
+    <!--<select id="listCourse" resultType="com.zs.entity.Course">
+        select * from Course;
+    </select>-->
+
+    <!-- 配置数据源，数据库连接信息，支持配置多个数据源 -->
+    <environments default="development">
+        <!-- 数据库连接信息 -->
+        <environment id="development">
+            <!-- 配置事务管理模式，让mybatis采用jdbc的管理模式-->
+            <transactionManager type="JDBC"/>
+            <!-- 配置连接池，数据库连接信息，type属性在指名用那个连接池，POOLED是mybatis自带的连接池-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/sell?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSl=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <package name="com.zs.mapper"/>
+    </mappers>
+</configuration>
